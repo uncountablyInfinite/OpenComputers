@@ -135,7 +135,8 @@ trait NetworkControl[AETile >: Null <: TileEntity with IGridProxyable with IActi
 
   @Callback(doc = "function():userdata -- Get an iterator object for the list of the items in the network.")
   def allItems(context: Context, args: Arguments): Array[AnyRef] = {
-    result(new NetworkContents(tile))
+    result(allItems
+      .map(item => convert(item, tile)))
   }
 
   @Callback(doc = "function(filter:table, dbAddress:string[, startSlot:number[, count:number]]): Boolean -- Store items in the network matching the specified filter in the database with the specified address.")
